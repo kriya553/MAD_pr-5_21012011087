@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MAD_pr-5_21012011087</string>
+    <string name="alarm">Alarm</string>
+    <string name="browse">Browse</string>
+    <string name="call">Call</string>
+    <string name="call_log">Call Log</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="https_www_google_com">https://www.google.com</string>
+    <string name="Call_log">Call Log</string>
+    <string name="aLarm">Alarm</string>
+    <string name="Camera">Camera</string>
+    <string name="Gallery">Gallery</string>
+    <string name="phone_no">Phone No</string>
+    <string name="web_url">Web Url</string>
+</resources>
