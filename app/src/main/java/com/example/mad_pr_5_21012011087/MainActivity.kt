@@ -1,45 +1,57 @@
 package com.example.mad_pr_5_21012011087
-
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.CallLog
-import android.util.Log
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        impenitent()
+
+        val buttonBrowse:Button = findViewById(R.id.button_browse)
+        val editUrl: EditText = findViewById(R.id.edittexturl)
+
+        buttonBrowse.setOnClickListener { openBrowser(editUrl.text.toString()) }
+
+
+        val buttonCall:Button = findViewById(R.id.button_call)
+        val editCall:EditText = findViewById(R.id.edittextcall)
+
+        buttonCall.setOnClickListener { openCall(editCall.text.toString()) }
     }
-    private fun impenitent()
-    {
-        findViewById<Button>(R.id.button_browse).setOnClickListener {
-         Log.i("cilck", "ManActivity")
-            Intent(Intent.ACTION_VIEW, Uri.parse(findViewById<EditText>(R.id.input_url).toString())).also{ startActivity(it)}
-        }
-        findViewById<Button>(R.id.button_call_log).setOnClickListener {
-            Log.i("cilck" , "MainActivity")
-            val number=findViewById<EditText>(R.id.input_phone_no).text.toString().trim()
-            Intent(Intent.ACTION_DIAL).data = ((Uri.parse("tel$number"))).apply {  }
 
-        }
-        findViewById<Button>(R.id.button_call).setOnClickListener {
-            Log.i("Cilck_Call-log", "MainActivity")
-            Intent(Intent.ACTION_VIEW).setType(CallLog.Calls.CONTENT_TYPE).also { startActivity(it) }
-        }
-        findViewById<Button>(R.id.button_gallery).setOnClickListener {
-            Log.i("Click_Gallery","MainActivity")
-            Intent(Intent.ACTION_VIEW).setType("image/*").also { startActivity(it) }
-        }
-        findViewById<Button>(R.id.button_alarm).setOnClickListener {
-            Log.i("Click","MainActivity")
-            Intent(AlarmClock.ACTION_SHOW_ALARMS).also { startActivity(it) }
-        }
 
+
+
+    fun openBrowser(url:String){
+        Intent(Intent.ACTION_VIEW,Uri.parse(url)).also { startActivity(it) }
+    }
+
+    fun openCall(number:String){
+        Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:$number")).also { startActivity(it) }
+    }
+
+    fun openCallLog(){
+        Intent(Intent.ACTION_VIEW).setType(CallLog.Calls.CONTENT_TYPE).also { startActivity(it) }
+    }
+
+    fun openGallery(){
+        Intent(Intent.ACTION_VIEW).setType("image/*").also { startActivity(it) }
+    }
+
+    fun openCamera(){
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { startActivity(it) }
+    }
+
+    fun openAlarm(){
+        Intent(AlarmClock.ACTION_SHOW_ALARMS).also { startActivity(it) }
     }
 }
